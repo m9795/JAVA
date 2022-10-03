@@ -28,17 +28,20 @@ public class Main {
 		//ヘッダーパネルを作成
 		JPanel headerPanel = makePanel(Color.BLACK, 640, 50);
 		headerPanel.setLayout(new BorderLayout());
-		JLabel label = new JLabel("「さあ、じゃんけんで勝負だ！」");
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("MA ゴシック", Font.PLAIN, 24));
-		label.setHorizontalAlignment(JLabel.CENTER);
-		label.setVerticalAlignment(JLabel.CENTER);
-		headerPanel.add(label);
+		//テキストを作成
+		JLabel headerLabel = makeText("「さあ、じゃんけんで勝負だ！」", 24, Color.WHITE);
+		//ヘッダーパネルにテキストを追加
+		headerPanel.add(headerLabel);
 		//ウインドウにヘッダーパネルを追加
 		frame.add(headerPanel, BorderLayout.NORTH);	
 		
 		//コンテンツパネルを作成
 		JPanel contentsPanel = makePanel(Color.WHITE);
+		contentsPanel.setLayout(new BorderLayout());
+		//テキストを作成
+		JLabel contentsLabel = makeText("じゃんけん...", 54, Color.BLACK);
+		//コンテンツパネルにテキストを追加
+		contentsPanel.add(contentsLabel);
 		//ウィンドウにコンテンツパネルを追加
 		frame.add(contentsPanel, BorderLayout.CENTER);
 		
@@ -71,5 +74,19 @@ public class Main {
 		panel.setBackground(color);
 		//作ったパネルを返す
 		return panel;	
+	}
+	
+	//テキストを作るメソッド
+	static JLabel makeText(String str, int size, Color color) {
+		//JLabelクラスをインスタンス化
+		JLabel label = new JLabel(str);
+		label.setForeground(color);
+		label.setFont(new Font("ＭＳ ゴシック", Font.PLAIN, size));
+		//テキストの位置を、水平方向の中心にする
+		label.setHorizontalAlignment(JLabel.CENTER);
+		//テキストの位置を、水平方向の中心にする
+		label.setVerticalAlignment(JLabel.CENTER);
+		//作ったテキストを返す
+		return label;
 	}
 }
