@@ -2,14 +2,17 @@ package jangen_game;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Main {
+	//じゃんけんの手の配列を作る
+	private static String[] hands = {"グー", "チョキ", "パー"};
 
 	public static void main(String[] args) {
 		// TODO 自動生成されたメソッド・スタブ
@@ -26,7 +29,7 @@ public class Main {
 		frame.setResizable(false);
 		
 		//ヘッダーパネルを作成
-		JPanel headerPanel = makePanel(Color.BLACK, 640, 50);
+		JPanel headerPanel = PanelMaker.makePanel(Color.BLACK, 640, 50);
 		headerPanel.setLayout(new BorderLayout());
 		//テキストを作成
 		JLabel headerLabel = makeText("「さあ、じゃんけんで勝負だ！」", 24, Color.WHITE);
@@ -36,7 +39,7 @@ public class Main {
 		frame.add(headerPanel, BorderLayout.NORTH);	
 		
 		//コンテンツパネルを作成
-		JPanel contentsPanel = makePanel(Color.WHITE);
+		JPanel contentsPanel = PanelMaker.makePanel(Color.WHITE);
 		contentsPanel.setLayout(new BorderLayout());
 		//テキストを作成
 		JLabel contentsLabel = makeText("じゃんけん...", 54, Color.BLACK);
@@ -46,7 +49,20 @@ public class Main {
 		frame.add(contentsPanel, BorderLayout.CENTER);
 		
 		//フッターパネル作成
-		JPanel footerPanel = makePanel(Color.BLACK, 640, 50);
+		JPanel footerPanel = PanelMaker.makePanel(Color.BLACK, 640, 50);
+		//フッターパネルにレイアウトマネージャーとしてGridLayoutを指定
+		footerPanel.setLayout(new GridLayout());
+		
+		//じゃんけんの手のボタンを作る
+		for (String hand : hands) {
+			//JButtonクラスをインスタンス化
+			JButton button = new JButton(hand);
+			button.setFont(new Font("ＭＳ ゴシック", Font.PLAIN, 24));
+			//グーボタンをフッターパネルに追加
+			footerPanel.add(button);
+		}
+		
+		
 		//ウィンドウにフッターパネルを追加
 		frame.add(footerPanel, BorderLayout.SOUTH);
 		
@@ -54,27 +70,6 @@ public class Main {
 		frame.setVisible(true);
 	}
 	
-	//パネルを作るメソッド(幅と高さを指定する用)
-	static JPanel makePanel(Color color, int width, int height) {
-		//JPanelクラスをインスタンス化
-		JPanel panel = new JPanel();
-		//パネルの色を変更する
-		panel.setBackground(color);
-		//パネルのサイズ設定「横、縦」
-		panel.setPreferredSize(new Dimension(width, height));
-		//作ったパネルを返す
-		return panel;	
-	}
-	
-	//パネルを作るメソッド(幅と高さを指定しない用)
-	static JPanel makePanel(Color color) {
-		//JPanelクラスをインスタンス化
-		JPanel panel = new JPanel();
-		//パネルの色を変更する
-		panel.setBackground(color);
-		//作ったパネルを返す
-		return panel;	
-	}
 	
 	//テキストを作るメソッド
 	static JLabel makeText(String str, int size, Color color) {
