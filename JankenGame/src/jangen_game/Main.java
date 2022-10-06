@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,7 +34,7 @@ public class Main {
 		JPanel headerPanel = PanelMaker.makePanel(Color.BLACK, 640, 50);
 		headerPanel.setLayout(new BorderLayout());
 		//テキストを作成
-		JLabel headerLabel = makeText("「さあ、じゃんけんで勝負だ！」", 24, Color.WHITE);
+		JLabel headerLabel = TextMaker.makeText("「さあ、じゃんけんで勝負だ！」", 24, Color.WHITE);
 		//ヘッダーパネルにテキストを追加
 		headerPanel.add(headerLabel);
 		//ウインドウにヘッダーパネルを追加
@@ -42,7 +44,7 @@ public class Main {
 		JPanel contentsPanel = PanelMaker.makePanel(Color.WHITE);
 		contentsPanel.setLayout(new BorderLayout());
 		//テキストを作成
-		JLabel contentsLabel = makeText("じゃんけん...", 54, Color.BLACK);
+		JLabel contentsLabel = TextMaker.makeText("じゃんけん...", 54, Color.BLACK);
 		//コンテンツパネルにテキストを追加
 		contentsPanel.add(contentsLabel);
 		//ウィンドウにコンテンツパネルを追加
@@ -58,6 +60,8 @@ public class Main {
 			//JButtonクラスをインスタンス化
 			JButton button = new JButton(hand);
 			button.setFont(new Font("ＭＳ ゴシック", Font.PLAIN, 24));
+			//ボタンが押されたら、ButtonActionListenerクラスのactionPerformedメソッドを実行
+			button.addActionListener(new ButtonActionListener());
 			//グーボタンをフッターパネルに追加
 			footerPanel.add(button);
 		}
@@ -70,18 +74,13 @@ public class Main {
 		frame.setVisible(true);
 	}
 	
-	
-	//テキストを作るメソッド
-	static JLabel makeText(String str, int size, Color color) {
-		//JLabelクラスをインスタンス化
-		JLabel label = new JLabel(str);
-		label.setForeground(color);
-		label.setFont(new Font("ＭＳ ゴシック", Font.PLAIN, size));
-		//テキストの位置を、水平方向の中心にする
-		label.setHorizontalAlignment(JLabel.CENTER);
-		//テキストの位置を、水平方向の中心にする
-		label.setVerticalAlignment(JLabel.CENTER);
-		//作ったテキストを返す
-		return label;
+	//ボタンが押された時のためのクラス
+	static class ButtonActionListener implements ActionListener {
+		//ボタンが押されたときに呼ばれるメソッド
+		public void actionPerformed(ActionEvent e) {
+			//押されたボタンを、コンソールに表示
+			System.out.println(e.getActionCommand());
+		}
 	}
+	
 }
