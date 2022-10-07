@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 public class Main {
 	//じゃんけんの手の配列を作る
 	private static String[] hands = {"グー", "チョキ", "パー"};
+	
+	static JLabel contentsLabel;
 
 	public static void main(String[] args) {
 		// TODO 自動生成されたメソッド・スタブ
@@ -44,7 +46,7 @@ public class Main {
 		JPanel contentsPanel = PanelMaker.makePanel(Color.WHITE);
 		contentsPanel.setLayout(new BorderLayout());
 		//テキストを作成
-		JLabel contentsLabel = TextMaker.makeText("じゃんけん...", 54, Color.BLACK);
+		contentsLabel = TextMaker.makeText("じゃんけん...", 54, Color.BLACK);
 		//コンテンツパネルにテキストを追加
 		contentsPanel.add(contentsLabel);
 		//ウィンドウにコンテンツパネルを追加
@@ -79,7 +81,13 @@ public class Main {
 		//ボタンが押されたときに呼ばれるメソッド
 		public void actionPerformed(ActionEvent e) {
 			//押されたボタンを、コンソールに表示
-			System.out.println(e.getActionCommand());
+			//System.out.println(e.getActionCommand());
+			//コンピュータの手（数値）をランダムに取得
+			int computerHandNum = ComputerHand.getComputerHand();
+			//数値からコンピュータの手を取り出して代入
+			String computerHand = hands[computerHandNum];
+			//コンテンツパネルのテキストに、コンピュータの手を指定
+			contentsLabel.setText(computerHand);
 		}
 	}
 	
