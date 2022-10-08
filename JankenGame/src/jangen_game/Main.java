@@ -17,6 +17,7 @@ public class Main {
 	private static String[] hands = {"グー", "チョキ", "パー"};
 	
 	static JLabel contentsLabel;
+	static JLabel headerLabel;
 
 	public static void main(String[] args) {
 		// TODO 自動生成されたメソッド・スタブ
@@ -36,7 +37,7 @@ public class Main {
 		JPanel headerPanel = PanelMaker.makePanel(Color.BLACK, 640, 50);
 		headerPanel.setLayout(new BorderLayout());
 		//テキストを作成
-		JLabel headerLabel = TextMaker.makeText("「さあ、じゃんけんで勝負だ！」", 24, Color.WHITE);
+		headerLabel = TextMaker.makeText("「さあ、じゃんけんで勝負だ！」", 24, Color.WHITE);
 		//ヘッダーパネルにテキストを追加
 		headerPanel.add(headerLabel);
 		//ウインドウにヘッダーパネルを追加
@@ -88,6 +89,19 @@ public class Main {
 			String computerHand = hands[computerHandNum];
 			//コンテンツパネルのテキストに、コンピュータの手を指定
 			contentsLabel.setText(computerHand);
+			//プレイヤーが出した手に対応スタ数値を入れるための変数
+			int playerHandNum = 0;
+			//プレイヤーが出したての数値を探してplayerHandNumに入れる
+			for (int i = 0; i < hands.length; i++) {
+				if (hands[i] == e.getActionCommand()) {
+					playerHandNum = i;
+					break;
+				}
+			}
+			//プレイヤーとコンピュータの手を比べて、結果のセリフを取得
+			String serif = Judge.getResultText(playerHandNum, computerHandNum);
+			//ヘッダーにセリフを表示
+			headerLabel.setText(serif);
 		}
 	}
 	
