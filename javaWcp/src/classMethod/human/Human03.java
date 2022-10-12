@@ -16,7 +16,6 @@ public class Human03 {
 		return "年齢は" + this.age + "、職業は" + this.profession;
 	}
 	
-	//戻り値を返さない、String型の引数を1つとるメソッドを定義
 	public void greet(String friend) {
 		if (friend == null) {
 			System.out.println("挨拶する友達がわかりません！");

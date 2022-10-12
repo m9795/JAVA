@@ -13,5 +13,4 @@ public class ClassMethod03 {
 		yamada.greet("田辺");
 		yamada.greet(null);
 	}
-
 }
